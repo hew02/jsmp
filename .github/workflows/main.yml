@@ -31,15 +31,26 @@ jobs:
             --minify \
             --outfile=dist/jsmp.min.js
 
-      - name: Create or update latest release
+      - name: Publish generated file to cdn branch
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release view latest >/dev/null 2>&1 || \
-            gh release create latest \
-              --title "Latest build" \
-              --notes "Automatically updated build from the main branch"
+          git fetch origin cdn:cdn || true
 
-          gh release upload latest \
-            dist/my-component.min.js \
-            --clobber
+          git checkout cdn 2>/dev/null || git checkout --orphan cdn
+
+          git rm -rf . 2>/dev/null || true
+          mkdir -p dist
+          cp "$GITHUB_WORKSPACE/dist/jsmp.min.js" dist/jsmp.min.js
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add dist/jsmp.min.js
+          git commit -m "Update CDN build" || echo "No changes to commit"
+          git push origin cdn
+
+      - name: Purge jsDelivr cache
+        uses: gacts/purge-jsdelivr-cache@v1
+        with:
+          url: https://cdn.jsdelivr.net/gh/${{ github.repository }}@cdn/dist/my-component.min.js

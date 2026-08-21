@@ -1,0 +1,38 @@
+name: Build web component
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download esbuild
+        run: |
+          curl -L \
+            https://github.com/evanw/esbuild/releases/latest/download/esbuild-linux-64.tgz \
+            -o esbuild.tgz
+          tar -xzf esbuild.tgz
+          chmod +x esbuild
+          sudo mv esbuild /usr/local/bin/esbuild
+
+      - name: Create dist directory
+        run: mkdir -p dist
+
+      - name: Minify JavaScript
+        run: |
+          esbuild jsmp.js \
+            --minify \
+            --outfile=dist/jsmp.min.js
+
+      - name: Upload generated file
+        uses: actions/upload-artifact@v4
+        with:
+          name: jsmp
+          path: dist/jsmp.min.js

@@ -40,8 +40,6 @@ jobs:
           git checkout cdn 2>/dev/null || git checkout --orphan cdn
 
           git rm -rf . 2>/dev/null || true
-          mkdir -p dist
-          cp "$GITHUB_WORKSPACE/dist/jsmp.min.js" dist/jsmp.min.js
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

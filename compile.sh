@@ -1,7 +1,7 @@
 #!/bin/sh
-HTML="$(cat ./jsmp.html | minify --type html)"
-CSS="$(cat ./style.css | minify --type css)"
-JS="$(cat ./jsmp.js | minify --type js)"
+HTML="$(cat ./src/jsmp.html | minify --type html)"
+CSS="$(cat ./src/style.css | minify --type css)"
+JS="$(cat ./src/jsmp.js | minify --type js)"
 
 escape_sed_repl() {
   printf '%s' "$1" \

@@ -13,21 +13,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Download esbuild
-        run: |
-          curl -L \
-            https://github.com/evanw/esbuild/releases/latest/download/esbuild-linux-64.tgz \
-            -o esbuild.tgz
-          tar -xzf esbuild.tgz
-          chmod +x esbuild
-          sudo mv esbuild /usr/local/bin/esbuild
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Install esbuild
+        run: go install github.com/evanw/esbuild/cmd/esbuild@latest
 
       - name: Create dist directory
         run: mkdir -p dist
 
       - name: Minify JavaScript
         run: |
-          esbuild jsmp.js \
+          "$(go env GOPATH)/bin/esbuild" \
+            jsmp.js \
             --minify \
             --outfile=dist/jsmp.min.js
 

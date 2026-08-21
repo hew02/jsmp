@@ -1,5 +1,8 @@
 name: Build web component
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [master]
@@ -33,20 +36,23 @@ jobs:
 
       - name: Publish generated file to cdn branch
         env:
-          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git fetch origin cdn:cdn || true
-
-          git checkout cdn 2>/dev/null || git checkout --orphan cdn
-
-          git rm -rf . 2>/dev/null || true
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin cdn:cdn || true
+
+          if git ls-remote --exit-code --heads origin latest >/dev/null 2>&1; then
+            git fetch origin latest
+            git checkout -B latest origin/latest
+          else
+            git checkout --orphan latest
+            git rm -rf . || true
+          fi
 
           git add dist/jsmp.min.js
           git commit -m "Update CDN build" || echo "No changes to commit"
-          git push origin cdn
+          git push origin latest
 
       - name: Purge jsDelivr cache
         uses: gacts/purge-jsdelivr-cache@v1

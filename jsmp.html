@@ -1,0 +1,63 @@
+<div class="webamp-player">
+  <section id="webamp-main">
+    <h1 id="webamp-player-display-name">jsmp</h1>
+
+    <audio id="audio-player" src="" preload="metadata"></audio>
+
+    <div id="webamp-player-top-row">
+
+      <div id="webamp-player-display" style="width:30%">
+        <span id="webamp-player-status"><svg xmlns="http://www.w3.org/2000/svg" viewBox="4 4 24 24" fill="currentColor"><path d="M6 5H18C18.5523 5 19 5.44772 19 6V18C19 18.5523 18.5523 19 18 19H6C5.44772 19 5 18.5523 5 18V6C5 5.44772 5.44772 5 6 5Z"></path></svg></span>
+        <span id="webamp-player-current-time">00:00</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;width:70%;gap:8px;min-width:0;">
+
+        <div id="webamp-player-current-song">
+          <div class="ticker" aria-label="Looping track artist and title">
+            <div class="ticker-track">
+              <div class="ticker-group"><span class="ticker-item"></span><span class="ticker-item"></span><span class="ticker-item"></span></div>
+              <div class="ticker-group" aria-hidden="true"><span class="ticker-item"></span><span class="ticker-item"></span><span class="ticker-item"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;width:100%;background-color:black;color:orange;">
+          <!--<div style="display:flex;gap:14px;">
+            <p>160 kbps</p>
+            <p>44 kHz</p>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <p style="color:white;">mono</p>
+            <p>stereo</p>
+          </div>-->
+        </div>
+
+        <div style="width:40%;">
+          <input id="webamp-player-volume-slider" type="range" value="document.getElementById('player').volume" min=1 max=100>
+        </div>
+
+      </div>
+    </div>
+
+    <input id="webamp-player-scrubber" type="range" value="0" min="0" max="100" step="1">
+
+    <div id="webamp-player-controls"> 
+      <button id="webamp-btn-prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 11.3333L18.2227 4.51823C18.4524 4.36506 18.7628 4.42714 18.916 4.65691C18.9708 4.73904 19 4.83555 19 4.93426V19.0657C19 19.3419 18.7761 19.5657 18.5 19.5657C18.4013 19.5657 18.3048 19.5365 18.2227 19.4818L8 12.6667V19C8 19.5523 7.55228 20 7 20C6.44772 20 6 19.5523 6 19V5C6 4.44772 6.44772 4 7 4C7.55228 4 8 4.44772 8 5V11.3333Z"></path></svg></button> 
+      <button id="webamp-btn-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.376 12.4161L8.77735 19.4818C8.54759 19.635 8.23715 19.5729 8.08397 19.3432C8.02922 19.261 8 19.1645 8 19.0658V4.93433C8 4.65818 8.22386 4.43433 8.5 4.43433C8.59871 4.43433 8.69522 4.46355 8.77735 4.5183L19.376 11.584C19.6057 11.7372 19.6678 12.0477 19.5146 12.2774C19.478 12.3323 19.4309 12.3795 19.376 12.4161Z"></path></svg></button> 
+      <button id="webamp-btn-pause"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5H8V19H6V5ZM16 5H18V19H16V5Z"></path></svg></button>
+      <button id="webamp-btn-stop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5H18C18.5523 5 19 5.44772 19 6V18C19 18.5523 18.5523 19 18 19H6C5.44772 19 5 18.5523 5 18V6C5 5.44772 5.44772 5 6 5Z"></path></svg></button>
+      <button id="webamp-btn-next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 12.6667L5.77735 19.4818C5.54759 19.6349 5.23715 19.5729 5.08397 19.3431C5.02922 19.261 5 19.1645 5 19.0657V4.93426C5 4.65812 5.22386 4.43426 5.5 4.43426C5.59871 4.43426 5.69522 4.46348 5.77735 4.51823L16 11.3333V5C16 4.44772 16.4477 4 17 4C17.5523 4 18 4.44772 18 5V19C18 19.5523 17.5523 20 17 20C16.4477 20 16 19.5523 16 19V12.6667Z"></path></svg></button> 
+    </div>
+
+  </section>
+  <section id="webamp-playlist">
+
+    <div id="webamp-playlist-scrollable-area">
+      <ol></ol>
+      <div id="webamp-player-attribution">
+        <small>Developed by <a href="https://hwandover.com" target="_blank">hew2</a></small>
+      </div>
+    </div>
+  </section>
+</div>

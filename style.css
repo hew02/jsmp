@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Doto";
+}
+
+h1 { font-family: 'Courier New', Courier, monospace; }
+
+button {cursor: pointer;}
+
+#webamp-player {display:flex;flex-direction:column;}
+
+section {
+  padding:6px;border:6px outset #9a9a9a;
+  background-image:url("https://hwandover.com/stuff/metal.jpg"),linear-gradient(to bottom right, darkgray, gray, darkgray);
+  background-repeat:repeat, no-repeat;background-size:100% 100%, cover;background-blend-mode: difference;
+}
+
+#webamp-playlist {
+  #webamp-playlist-scrollable-area {
+    padding: 10px 2px 10px 14px; margin-right: 2%;
+    box-sizing:border-box;border:4px inset #9a9a9a;
+    background-color: black;
+    ol * { font-size: 1.15em; }
+    *.unselected, *.unselected * {color:lightblue;}
+    *.selected, *.selected * { color: white; }
+    button { outline: none; }
+    li:hover * {background-color:lightblue;color:black;}
+  }
+  ol {padding: 0px 12px 0px 24px;}
+}
+
+#webamp-player-attribution {color:white;a{color:lightblue;}width:94%;text-align:right;}
+
+#webamp-player-display {
+  background-color: black;
+  box-sizing: border-box;
+  border: 4px inset black;
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    justify-content: initial;
+  }
+  align-items: flex-start;
+  padding: 4px 8px 0px 4px;
+  container-type: inline-size;
+  container-name: webamp-player-display;
+
+  #webamp-player-status, #webamp-player-current-time {color:lightblue;}
+}
+
+@container webamp-player-display (min-width: 700px) {
+  #webamp-player-current-time {
+    font-size: 2.5em;
+  }
+  #webamp-player-status svg {
+    width: 3em; 
+  }
+}
+
+#webamp-player-current-time {
+  font-size: 20cqw;
+}
+
+#webamp-player-status svg {
+  width: 30cqw;
+}
+
+.playlist-entry {
+  width: 100%;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  p {
+    white-space: nowrap; 
+  }
+}
+
+#webamp-player-controls button {
+  padding:0;background-color:black;
+  border:4px outset #9a9a9a;
+  color: gray;
+  svg {width:2em;height:2em;}
+}
+
+#webamp-player-controls button:active {
+  border: 4px inset #9a9a9a;
+  background-color: black;
+  color: lightgray;
+}
+
+#webamp-player-volume-slider {
+  -webkit-appearance: none;appearance: none;
+  box-sizing: border-box;border: 4px inset #9a9a9a;
+  height: 1.1em; width:100%; background: black;
+  cursor: pointer;
+  &::-webkit-slider-thumb {
+    -webkit-appearance:none;appearance:none;
+    width: 2.2em;height: 1.6em;
+    background:lightblue;cursor: pointer;
+    border: 3px inset #9a9a9a;
+  }
+}
+/* TODO disable pointer when no song is selected */
+#webamp-player-scrubber {
+  width: 100%;-webkit-appearance: none;
+  height: 2em; background-color:black;
+  box-sizing: border-box;border: 4px inset #9a9a9a;
+  cursor: pointer;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 2.8em;height: 2.2em;
+    background:black;cursor: pointer;
+    border: 3px inset #9a9a9a;
+  }
+
+  margin-bottom: 10px;
+}
+
+#webamp-player-current-song {
+  background-color: black;
+  box-sizing: border-box;border: 4px inset #9a9a9a;
+  color:lightblue;padding: 4px 4px 4px 4px;
+  height: 1.7em; font-size: 2em;
+}
+
+@keyframes loop{ from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker {position:relative;overflow:hidden;white-space:nowrap;}
+.ticker-track {position:relative;display:flex;width:max-content;animation:loop 12s linear infinite;} 
+.ticker-item {display:inline-flex;align-items:center;padding:0 26px;}
+
+#webamp-player-display-name {color:gray;text-align:right;margin:0px 0px 2px 0px;}
+
+#webamp-player-top-row {
+  display:flex;width:100%;
+  gap:0.5em;margin-bottom:10px;
+}
